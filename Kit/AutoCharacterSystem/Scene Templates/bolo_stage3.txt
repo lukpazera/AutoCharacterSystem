@@ -1,0 +1,14 @@
+# STAGE 3, requires STAGE 2 to be completed
+# ======== Rig Clay
+rs.context meshes true animate
+rs.subcontext meshes clay true
+rs.rig.clayAutoSetup selsets false rootItem:{$RIGROOT}
+select.drop polygon
+rs.rig.clayMode tool
+# ======== Switch to animate context and hide bind skeleton
+rs.context animate true
+rs.context.elementsVisibility animate bindskel state:false
+# ======== Default Pose
+preset.do "$KIT\Presets\Poses\Bolo\Default.lxp"
+# ======== Save out
+scene.saveAs "$KIT\Samples\Bolo_Rigged.lxo" $LXOB false

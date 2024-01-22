@@ -1,0 +1,14 @@
+preset.do "$KIT\Samples\Dog_Start.lxo"
+preset.do "$KIT\Presets\Rigs\Quadruped.lxp"
+rs.rig.name name:{Dog} rootItem:{$RIGROOT}
+
+# ======== Change number of segments in tail and ears
+rs.module.edit rootItem:{Dog__Tail (Module)}
+rs.module.property std.fkChain psegs 2
+
+rs.module.edit rootItem:{Dog__Right.Ear (Module)}
+rs.module.property std.fkChain psegs 3
+
+# ======== Drop and apply the guide ========
+preset.do preset:"$KIT\Presets\Guides\Dog.lxp"
+rs.guide.apply rootItem:{$RIGROOT}

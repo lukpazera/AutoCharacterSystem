@@ -1,0 +1,17 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Sdk
+Extra/Projects
+Extra/Sdk/common
+Extra/Sdk/include
+
+Kit/AutoCharacterSystem/Temp/rs_debug_log.txt
+
+# Folder for making builds.
+Build/Package
+
+# Pycharm project (if any)
+Kit/AutoCharacterSystem/.idea

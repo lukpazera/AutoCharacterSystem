@@ -1,0 +1,86 @@
+scene.new
+
+# Biped Advanced Rig
+# This preset is built on top of regular Biped so create Biped from template FIRST!!!
+preset.do "$KIT\Presets\Rigs\Biped.lxp"
+rs.rig.name name:{Biped_Adv} rootItem:{$RIGROOT}
+
+# ======== Enable holder joints
+
+rs.module.edit rootItem:{Biped_Adv__Right.Arm (Module)}
+rs.module.property std.arm.v2 armh true
+rs.module.property std.arm.v2 elbow true
+rs.module.property std.arm.v2 wrist true
+
+rs.module.edit rootItem:{Biped_Adv__Right.Leg (Module)}
+rs.module.property std.bipedLeg.v2 hip true
+rs.module.property std.bipedLeg.v2 knee true
+rs.module.property std.bipedLeg.v2 ankle true
+
+# ======== Enable stretching
+
+rs.module.edit rootItem:{Biped_Adv__Right.Arm (Module)}
+rs.module.property std.arm.v2 pstretch true
+
+rs.module.edit rootItem:{Biped_Adv__Right.Leg (Module)}
+rs.module.property std.bipedLeg.v2 pstretch true
+
+rs.module.edit rootItem:{Biped_Adv__Right.Shoulder (Module)}
+rs.module.property std.aimAtJoint pstretch true
+
+rs.module.edit rootItem:{Biped_Adv__Neck (Module)}
+rs.module.property std.fkChain pstretch true
+
+rs.module.edit rootItem:{Biped_Adv__Spine (Module)}
+rs.module.property std.spine pstretch true
+
+rs.module.edit rootItem:{Biped_Adv__Head (Module)}
+rs.module.property std.advJoint pstretch true
+
+# ======== Add muscle joint modules
+
+preset.do preset:"$KIT\Presets\Modules\Joint Muscle.lxp"
+rs.module.name name:{PectoralisMajor}
+rs.module.side side:2 applyGuide:false
+rs.module.property std.muscleJoint pextra true
+
+preset.do preset:"$KIT\Presets\Modules\Joint Muscle.lxp"
+rs.module.name name:{ShoulderPad}
+rs.module.side side:2 applyGuide:false
+rs.module.property std.muscleJoint pextra true
+
+# ======== Drop and apply armature shapes ========
+# We do it prior to mirroring to avoid applying shapes to mirrored side.
+# It's better for these properties to be already set and merely mirrored.
+# If armature shape is outdated for the mirrored side applying the preset here
+# avoids that issue.
+preset.do preset:"$KIT\Presets\Armature Shapes\Biped.lxp"
+
+# ======== Mirror newly modules
+rs.module.mirror true true rootItem:{$RIGROOT}
+
+# ======== Drop and apply the guide ========
+# We need to apply the guide here to be sure it gets applied to all new modules.
+preset.do preset:"$KIT\Presets\Guides\Biped.lxp"
+rs.guide.apply rootItem:{$RIGROOT}
+
+# ======== Connect all new plugs
+
+$CONNECT>Biped_Adv__Right.PectoralisMajor_Head (Plug)>Biped_Adv__Spine_Chest (Socket)
+$CONNECT>Biped_Adv__Right.PectoralisMajor_Tail (Plug)>Biped_Adv__Right.Arm_Arm (Socket)
+
+$CONNECT>Biped_Adv__Left.PectoralisMajor_Head (Plug)>Biped_Adv__Spine_Chest (Socket)
+$CONNECT>Biped_Adv__Left.PectoralisMajor_Tail (Plug)>Biped_Adv__Left.Arm_Arm (Socket)
+
+$CONNECT>Biped_Adv__Right.ShoulderPad_Head (Plug)>Biped_Adv__Spine_Chest (Socket)
+$CONNECT>Biped_Adv__Right.ShoulderPad_Tail (Plug)>Biped_Adv__Right.Arm_Arm (Socket)
+
+$CONNECT>Biped_Adv__Left.ShoulderPad_Head (Plug)>Biped_Adv__Spine_Chest (Socket)
+$CONNECT>Biped_Adv__Left.ShoulderPad_Tail (Plug)>Biped_Adv__Left.Arm_Arm (Socket)
+
+# ======== Switch to animate context
+rs.context ident:assembly state:true offIdent:animate
+
+# ======== Save New Preset With Thumbnail
+!rs.rig.quickSave captureThumb:0
+preset.thumbReplace preset:{$KIT\Presets\Rigs\Biped_Adv.lxp} image:{$KIT\Thumbnails\RigBipedAdv.png}

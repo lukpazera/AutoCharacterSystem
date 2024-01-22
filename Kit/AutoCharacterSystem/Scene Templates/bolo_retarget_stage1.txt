@@ -1,0 +1,11 @@
+preset.do "$KIT\Samples\Bolo_Retarget_Start.lxo"
+preset.do "$KIT\Presets\Rigs\Retarget_Biped.lxp"
+rs.rig.name name:{Bolo} rootItem:{$RIGROOT}
+
+# ======== Remove jaw module
+rs.module.edit rootItem:{Bolo__Jaw (Module)}
+rs.module.delete
+
+# ======== Remove Eyes
+rs.module.edit rootItem:{Bolo__Eyes (Module)}
+rs.module.delete

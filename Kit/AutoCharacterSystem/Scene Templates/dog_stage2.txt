@@ -1,0 +1,94 @@
+# ======== Drop and apply armature shapes ========
+preset.do "$KIT\Presets\Armature Shapes\Dog.lxp"
+
+# ======= Attach rigid meshes
+select.drop item
+
+select.item {BoxProxy_Tail Seg1} add
+select.item {BoxProxy_Tail Seg2} add
+
+select.item {BoxProxy_Spine Root} add
+select.item {BoxProxy_Spine Vertebra_1} add
+select.item {BoxProxy_Spine Vertebra2} add
+select.item {BoxProxy_Spine Vertebra3} add
+
+select.item {BoxProxy_Right Shoulder Base} add
+select.item {BoxProxy_Left Shoulder Base} add
+
+select.item {BoxProxy_Right BackLeg UpLeg} add
+select.item {BoxProxy_Right BackLeg LowLeg} add
+select.item {BoxProxy_Right BackLeg Ankle} add
+select.item {BoxProxy_Right BackLeg FootToe} add
+select.item {BoxProxy_Right BackLeg FootToeTip} add
+select.item {BoxProxy_Right BackLeg UpLeg Twist1} add
+select.item {BoxProxy_Right BackLeg UpLeg Twist2} add
+select.item {BoxProxy_Right BackLeg LowLeg Twist1} add
+
+select.item {BoxProxy_Left BackLeg UpLeg} add
+select.item {BoxProxy_Left BackLeg LowLeg} add
+select.item {BoxProxy_Left BackLeg Ankle} add
+select.item {BoxProxy_Left BackLeg FootToe} add
+select.item {BoxProxy_Left BackLeg FootToeTip} add
+select.item {BoxProxy_Left BackLeg UpLeg Twist1} add
+select.item {BoxProxy_Left BackLeg UpLeg Twist2} add
+select.item {BoxProxy_Left BackLeg LowLeg Twist1} add
+
+select.item {BoxProxy_Right FrontLeg UpLeg} add
+select.item {BoxProxy_Right FrontLeg LowLeg} add
+select.item {BoxProxy_Right FrontLeg Ankle} add
+select.item {BoxProxy_Right FrontLeg FootToe} add
+select.item {BoxProxy_Right FrontLeg FootToeTip} add
+select.item {BoxProxy_Right FrontLeg UpLeg Twist1} add
+select.item {BoxProxy_Right FrontLeg UpLeg Twist2} add
+select.item {BoxProxy_Right FrontLeg LowLeg Twist1} add
+
+select.item {BoxProxy_Left FrontLeg UpLeg} add
+select.item {BoxProxy_Left FrontLeg LowLeg} add
+select.item {BoxProxy_Left FrontLeg Ankle} add
+select.item {BoxProxy_Left FrontLeg FootToe} add
+select.item {BoxProxy_Left FrontLeg FootToeTip} add
+select.item {BoxProxy_Left FrontLeg UpLeg Twist1} add
+select.item {BoxProxy_Left FrontLeg UpLeg Twist2} add
+select.item {BoxProxy_Left FrontLeg LowLeg Twist1} add
+
+select.item {BoxProxy_Right Ear Seg1} add
+select.item {BoxProxy_Right Ear Seg2} add
+select.item {BoxProxy_Right Ear Seg3} add
+
+select.item {BoxProxy_Left Ear Seg1} add
+select.item {BoxProxy_Left Ear Seg2} add
+select.item {BoxProxy_Left Ear Seg3} add
+
+select.item {BoxProxy_Neck Seg1} add
+select.item {BoxProxy_Neck Seg2} add
+select.item {BoxProxy_Neck Seg3} add
+
+select.item {BoxProxy_Head Seg1} add
+select.item {BoxProxy_Jaw Seg1} add
+
+rs.attach.addAuto rigidmesh rootItem:{$RIGROOT}
+
+# Chest has to be attached manually is automatic attach gets the wrong joint.
+rs.attach.add rigidmesh mesh:{BoxProxy_Spine Chest} item:{Dog__Spine_Chest (Bind)} rootItem:{$RIGROOT}
+
+select.drop item
+
+# ======== Rig Clay
+rs.context meshes true animate
+rs.subcontext meshes clay true
+rs.rig.clayAutoSetup selsets false rootItem:{$RIGROOT}
+select.drop polygon
+rs.rig.clayMode tool
+
+# ======== Switch to animate context
+# Hide bind skeleton as well
+rs.context animate true
+rs.context.elementsVisibility animate bindskel state:false
+
+# ======== Apply default settings via pose
+preset.do "$KIT\Presets\Poses\Dog\Default.lxp"
+# ======== Remove animation to not have keys but keep values
+rs.anim.clear remove
+
+# ======== Save out
+scene.saveAs "$KIT\Samples\Dog_Rigged.lxo" $LXOB false

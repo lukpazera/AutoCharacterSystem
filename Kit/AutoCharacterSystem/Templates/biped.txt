@@ -1,0 +1,83 @@
+rs.rig.name name:{Biped} rootItem:{$RIGROOT}
+
+# ======== Add all modules ========
+preset.do preset:"$KIT\Presets\Modules\Controller.lxp"
+rs.module.name name:{Root}
+
+preset.do preset:"$KIT\Presets\Modules\Spine Vert.lxp"
+
+preset.do preset:"$KIT\Presets\Modules\Biped Leg.lxp"
+preset.do preset:"$KIT\Presets\Modules\Biped Arm.lxp"
+
+preset.do preset:"$KIT\Presets\Modules\Joint Aim At.lxp"
+rs.module.name name:{Shoulder}
+rs.module.side side:2 applyGuide:false
+ 
+preset.do preset:"$KIT\Presets\Modules\Joint Chain.lxp"
+rs.module.name name:{Neck}
+rs.module.property std.fkChain psegs 1
+
+preset.do preset:"$KIT\Presets\Modules\Joint Advanced.lxp"
+rs.module.name name:{Head}
+rs.module.property std.advJoint pspaces true
+item.channel TargetRestDistanceFactor 4.0 item:{Biped__Head}
+
+preset.do preset:"$KIT\Presets\Modules\Joint Standard.lxp"
+rs.module.name name:{Jaw}
+
+preset.do preset:"$KIT\Presets\Modules\Eyes.lxp"
+
+# ======== Drop and apply armature shapes ========
+# We do it prior to mirroring to avoid applying shapes to mirrored side.
+# It's better for these properties to be already set and merely mirrored.
+# If armature shape is outdated for the mirrored side applying the preset here
+# avoids that issue.
+preset.do preset:"$KIT\Presets\Armature Shapes\Biped.lxp"
+
+# ======== Mirror all modules
+rs.module.mirror true true rootItem:{$RIGROOT}
+
+# ======== Drop and apply the guide ========
+preset.do preset:"$KIT\Presets\Guides\Biped.lxp"
+
+# Need to attach some guides together, we want shoulder tips to go with arm guides.
+$ATTACH_GUIDE>Biped__Right.Shoulder_Tip (Guide) (Ctrl)>Biped__Right.Arm_Arm (Guide) (Ctrl)
+$ATTACH_GUIDE>Biped__Left.Shoulder_Tip (Guide) (Ctrl)>Biped__Left.Arm_Arm (Guide) (Ctrl)
+# Let's attach neck tip to head.
+$ATTACH_GUIDE>Biped__Neck_Tip (Guide) (Ctrl)>Biped__Head_Base (Guide) (Ctrl)
+
+rs.guide.apply rootItem:{$RIGROOT}
+rs.context ident:assembly state:true offIdent:animate
+
+# ======== Plug socket connections ========
+
+# Spine to root
+$CONNECT>Biped__Spine_Main (Plug)>Biped__Root_Main (Socket)
+
+# Legs
+$CONNECT>Biped__Right.Leg_Main (Plug)>Biped__Spine_Hips (Socket)
+$CONNECT>Biped__Left.Leg_Main (Plug)>Biped__Spine_Hips (Socket)
+
+# Shoulders
+$CONNECT>Biped__Right.Shoulder_Main (Plug)>Biped__Spine_Chest (Socket)
+$CONNECT>Biped__Left.Shoulder_Main (Plug)>Biped__Spine_Chest (Socket)
+
+# Arms
+$CONNECT>Biped__Right.Arm_Primary (Plug)>Biped__Right.Shoulder_Socket (Socket)
+$CONNECT>Biped__Left.Arm_Primary (Plug)>Biped__Left.Shoulder_Socket (Socket)
+
+# Neck
+$CONNECT>Biped__Neck_Main (Plug)>Biped__Spine_Chest (Socket)
+
+# Head
+$CONNECT>Biped__Head_Main (Plug)>Biped__Neck_Seg1 (Socket)
+
+# Jaw
+$CONNECT>Biped__Jaw_Main (Plug)>Biped__Head_Main (Socket)
+
+# Eyes
+$CONNECT>Biped__Eyes_Main (Plug)>Biped__Head_Main (Socket)
+
+# ======== Save New Preset With Thumbnail
+!rs.rig.quickSave captureThumb:0
+preset.thumbReplace preset:{$KIT\Presets\Rigs\Biped.lxp} image:{$KIT\Thumbnails\RigBiped.png}

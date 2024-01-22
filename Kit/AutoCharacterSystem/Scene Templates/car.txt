@@ -1,0 +1,61 @@
+preset.do "$KIT\Samples\Car_Start.lxo"
+preset.do "$KIT\Presets\Rigs\Car.lxp"
+
+# ======== Change rig name
+# rs.rig.name name:{Car} rootItem:{$RIGROOT}
+
+# ======== Add standard joint for right side door
+preset.do preset:"$KIT\Presets\Modules\Joint Standard.lxp"
+rs.module.property std.joint pdeform false
+rs.module.name name:{Door}
+rs.module.side side:2 applyGuide:false
+
+# ======== Drop and apply the guide ========
+preset.do preset:"$KIT\Presets\Guides\Car.lxp"
+rs.guide.apply rootItem:{$RIGROOT}
+
+# ======== Mirror all modules which will really mirror just the door
+rs.module.mirror true true rootItem:{$RIGROOT}
+
+# ======== Drop and apply armature shapes ========
+preset.do preset:"$KIT\Presets\Armature Shapes\Car.lxp"
+
+# ======== Plug socket connections ========
+
+# Doors need to be connected to body
+$CONNECT>Car__Right.Door_Main (Plug)>Car__Body_Main (Socket)
+$CONNECT>Car__Left.Door_Main (Plug)>Car__Body_Main (Socket)
+
+# ======= Attach rigid meshes
+select.drop item
+
+select.item {Body} add
+select.item {RightDoor} add
+select.item {LeftDoor} add
+
+select.item {FrontRightWheel} add
+select.item {FrontLeftWheel} add
+select.item {RearRightWheel} add
+select.item {RearLeftWheel} add
+
+rs.attach.addAuto rigidmesh rootItem:{$RIGROOT}
+
+# ======== Turn on gesture mode on doors (rigid joints)
+# Remember that we need to reference the actual module assembly items that have this channel set up!!!
+item.channel RigClayUseGestureMode true item:{$ITEM<Car__Right.Door>}
+item.channel RigClayUseGestureMode true item:{$ITEM<Car__Left.Door>}
+
+# ======== Rig Clay
+rs.context meshes true animate
+rs.subcontext meshes clay true
+rs.rig.clayAutoSetup method:selsets addSelectionSets:false rootItem:{$RIGROOT}
+select.drop polygon
+rs.rig.clayMode tool
+
+# ======== Switch to animate context
+# Hide bind skeleton as well
+rs.context animate true
+rs.context.elementsVisibility animate bindskel state:false
+
+# ======== Save out
+scene.saveAs "$KIT\Samples\Car_Rigged.lxo" $LXOB false

@@ -1,0 +1,10 @@
+# STAGE 2, requires STAGE 1 to be complete
+# ======== Drop and apply the guide ========
+preset.do preset:"$KIT\Presets\Guides\Bolo_Retarget.lxp"
+rs.guide.apply rootItem:{$RIGROOT}
+# ======== Drop and apply armature shapes ========
+preset.do "$KIT\Presets\Armature Shapes\Bolo_Retarget.lxp"
+# ======== Bind
+rs.bind.assignMesh autoFreeze:false mesh:{Bolo_Mesh} rootItem:{$RIGROOT}
+select.item Bolo_Mesh set
+rs.bind.fromMap rootItem:{$RIGROOT}

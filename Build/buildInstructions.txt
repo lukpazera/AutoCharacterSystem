@@ -1,0 +1,18 @@
+Auto Character System 3 build instructions
+------------------------------------------
+
+ACS3 build process is a simple one step action from command prompt on Windows.
+You do have to configure the build process once beforehand though.
+You do it by setting variables marked with !!! in the Build\Scripts\build.py script.
+Below are the steps that you need to complete to be able to build ACS3.
+
+=======
+  WIN
+=======
+1. Navigate to and open Build\Scripts\build.py script source file.
+   Set KIT_PATH, PACKAGE_PATH and DESTINATION_PATH variables inside build.py as outlined in comments within the script.
+3. Make sure python 3.x is installed on your system.
+4. Launch command prompt and fire this command:
+   python {local path to AutoCharacterSystem repository}\Build\Scripts\build.py
+5. If build process was successfull you'll have installation .zip file in the DESTINATION_PATH.
+

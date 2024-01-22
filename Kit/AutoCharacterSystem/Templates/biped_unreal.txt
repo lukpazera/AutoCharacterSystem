@@ -1,0 +1,13 @@
+scene.new
+
+# Biped Unreal Rig
+# This preset is built on top of Biped_Game so create Biped_Game from template FIRST!!!
+preset.do "$KIT\Presets\Rigs\Biped_Game.lxp"
+rs.rig.name name:{Biped_Unreal} rootItem:{$RIGROOT}
+
+# ======== Drop Unreal naming scheme
+preset.do preset:"$KIT\Presets\Skeleton Bake\Unreal Biped.lxp"
+
+# ======== Save New Preset With Thumbnail
+!rs.rig.quickSave captureThumb:0
+preset.thumbReplace preset:{$KIT\Presets\Rigs\Biped_Unreal.lxp} image:{$KIT\Thumbnails\RigBipedUnreal.png}

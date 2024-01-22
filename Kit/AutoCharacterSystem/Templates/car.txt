@@ -1,0 +1,9 @@
+rs.rig.refSize 5 rootItem:{$RIGROOT}
+rs.rig.name name:{Car} rootItem:{$RIGROOT}
+
+# ======== Add all modules ========
+preset.do preset:"$KIT\Presets_Internal\Modules\Path Car Body.lxp"
+
+# ======== Save New Preset With Thumbnail
+!rs.rig.quickSave captureThumb:0
+preset.thumbReplace preset:{$KIT\Presets\Rigs\Car.lxp} image:{$KIT\Thumbnails\RigCar.png}

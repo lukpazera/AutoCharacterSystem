@@ -1,0 +1,10 @@
+preset.do "$KIT\Samples\Bolo_Adv_Start.lxo"
+preset.do "$KIT\Presets\Rigs\Biped_Adv.lxp"
+rs.rig.name name:{BoloAdv} rootItem:{$RIGROOT}
+
+# ======== Remove jaw and eyes modules
+rs.module.edit rootItem:{BoloAdv__Jaw (Module)}
+rs.module.delete
+
+rs.module.edit rootItem:{BoloAdv__Eyes (Module)}
+rs.module.delete
