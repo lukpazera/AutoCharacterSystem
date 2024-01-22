@@ -38,7 +38,7 @@ PACKAGE_PATH = 'LOCAL_REPOSITORY_PATH\\AutoCharacterSystem\\Build\\Package'
 DESTINATION_PATH = "LOCAL_REPOSITORY_PATH\\AutoCharacterSystem\\Build\\Release"
 
 # Name of the ACS3 installation zip file.
-ZIP_FILENAME = 'AutoCharacterSystem3.zip'
+ZIP_FILENAME = 'AutoCharacterSystem3.01.zip'
 
 
 def zipdir(path, ziph):
