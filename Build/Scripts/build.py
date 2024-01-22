@@ -24,17 +24,18 @@ FOLDER_NAME = 'AutoCharacterSystem3'
 
 # !!! Local path to the Kit/AutoCharacterSystem folder inside Auto Character System reposityory.
 # Installation will be built from this folder.
-KIT_PATH = 'LocalPathToRepository\\AutoCharacterSystem\\Kit\\AutoCharacterSystem'
+KIT_PATH = 'LOCAL_REPOSITORY_PATH\\AutoCharacterSystem\\Kit\\AutoCharacterSystem'
 
 # !!! Path in which the ACS3 installation package will be built.
 # The package is temporary, contents of that folder are deleted before each build.
 # By default you can create Package folder inside Build folder of the repository as a folder with 'Package' name
 # will be ignored by Github and will not be added to the repository.
-PACKAGE_PATH = 'LocalPathToRepository\\RiggingSystem\\Build\\Package'
+PACKAGE_PATH = 'LOCAL_REPOSITORY_PATH\\AutoCharacterSystem\\Build\\Package'
 
 # !!! When the packaging process is complete the contents of the Package folder are zipped up and copied to that location.
-# This is the final result of the build process.
-DESTINATION_PATH = "LocalPath\\Release"
+# This is the final result of the build process. By default you can create Release subfolder inside Build folder.
+# Similar to Build/Package the Build/Release is added to gitignore so it won't get added to the repository.
+DESTINATION_PATH = "LOCAL_REPOSITORY_PATH\\AutoCharacterSystem\\Build\\Release"
 
 # Name of the ACS3 installation zip file.
 ZIP_FILENAME = 'AutoCharacterSystem3.zip'
