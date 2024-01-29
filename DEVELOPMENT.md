@@ -47,3 +47,11 @@ There are 2 components to MODO plugin: a static library that is part of MODO SDK
 - We're ready to get the common library building.
 - Right click *Source* folder under the *Common* project (in the solution tree) then choose *Add > Existing Item* and navigate to the SDK *common* folder. Select and add all the files from that folder.
 - Now we need to configure a few properties. Right click on *Common* project in the solution tree and choose *Properties*.
+- Under *C/C++* *General* set *Additional Include Directories* to the path where SDK's include folder is. Change warning level to *W1*.
+![VS_CommonIncludeWarning](https://github.com/lukpazera/AutoCharacterSystem/assets/618099/57077bab-efb3-4254-985f-101d4e333eab)
+- Add following preprocessor definition: *_CRT_SECURE_NO_DEPRECATE* and if you are compiling for MODO 17+ add *_CRT_NONSTDC_NO_DEPRECATE* as well.
+  ![VS_CommonPreprocessor](https://github.com/lukpazera/AutoCharacterSystem/assets/618099/79335cab-85a8-4f7b-8093-92fba01349fc)
+- If you are compiling against MODO 17+ SDK you have to set *C++ Language Standard* to *C++ 17* as well.
+![VS_LanguageStandard](https://github.com/lukpazera/AutoCharacterSystem/assets/618099/b224fe3b-114c-4fc9-8d47-03adac044498)
+- At this point you should be able to successfully build both *Debug* and *Release* configurations of the *Common* library.
+
