@@ -55,3 +55,25 @@ There are 2 components to MODO plugin: a static library that is part of MODO SDK
 ![VS_LanguageStandard](https://github.com/lukpazera/AutoCharacterSystem/assets/618099/b224fe3b-114c-4fc9-8d47-03adac044498)
 - At this point you should be able to successfully build both *Debug* and *Release* configurations of the *Common* library.
 
+- It’s time to set up the actual plugin project.
+- Right click *Source* folder under the *RiggingSystem* project (in the solution tree) then choose *Add > Existing Item* and navigate to the *Extra\Src* folder. Select and add all the files from that folder.
+- Right click *RiggingSystem* project and choose *Build Dependencies/Project Dependencies*. Make sure *Rigging System* is dependent on *Common*.  
+![VS_RS_Dependencies](https://github.com/lukpazera/AutoCharacterSystem/assets/618099/2b0862a5-2dc4-47a2-b26c-e7d9f669c943)
+- Open project properties for *RiggingSystem*.
+- Add the preprocessing definition _CRT_SECURE_NO_DEPRECATE just like you did for *Common* lib. 
+- If you are compiling against *MODO 17* or later SDK you have to add *MODO_17* definition as well.
+![VS_RS_Preprocessor](https://github.com/lukpazera/AutoCharacterSystem/assets/618099/20d58f8d-ef7b-4a8e-b42c-0b542480309b)
+- In *Linker > General*, add the path to where *common.lib* builds to under *Additional Library Directories*. By default it'll be inside *x64/ConfigurationName* folder.
+  ![VS_RS_LibDirectories](https://github.com/lukpazera/AutoCharacterSystem/assets/618099/1b7724e0-95b1-4141-b003-5b0648b738fe)
+- Under *Linker > Input*, add *common.lib* to the end of *Additional Dependencies*.
+![VS_RS_Dependencies](https://github.com/lukpazera/AutoCharacterSystem/assets/618099/6afb4aa0-35ba-40b8-934f-5acaaf319c3f)
+- Finally, add SDK include directories. Keep in mind you have to add both *include* and *include/lxsdk* for MODO 17.
+![VS_RS_Includes](https://github.com/lukpazera/AutoCharacterSystem/assets/618099/43349145-2ecd-4c4f-8ff4-97543d9a42fd)
+- Now you should be able to successfully build the *RiggingSystem.lx* library.
+
+- Last thing you can do is to add a post build step that will automatically copy compiled *RiggingSystem.lx* to the kit location after each build.
+- Still in project properties, under *Build Events > Post-Build Event* add command according to this template (for MODO 17+):
+*copy /Y "$(TargetDir)$(TargetName).dll" "PATH_TO_LOCAL_REPO\Kit\AutoCharacterSystem\ExtraStartup\Extra\win64\$(TargetName).lx"*
+![VS_RS_PostBuild](https://github.com/lukpazera/AutoCharacterSystem/assets/618099/3ebaa6c3-e69c-421d-9672-2a478a8020c4)
+
+
