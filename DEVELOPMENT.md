@@ -73,7 +73,7 @@ There are 2 components to MODO plugin: a static library that is part of MODO SDK
 
 - Last thing you can do is to add a post build step that will automatically copy compiled *RiggingSystem.lx* to the kit location after each build.
 - Still in project properties, under *Build Events > Post-Build Event* add command according to this template (for MODO 17+):
-*copy /Y "$(TargetDir)$(TargetName).dll" "PATH_TO_LOCAL_REPO\Kit\AutoCharacterSystem\ExtraStartup\Extra\win64\$(TargetName).lx"*
+*copy /Y "$(TargetDir)$(TargetName).dll" "PATH_TO_LOCAL_REPO\Kit\AutoCharacterSystem\ExtraStartup\Extra\win64\\$(TargetName).lx"*
 ![VS_RS_PostBuild](https://github.com/lukpazera/AutoCharacterSystem/assets/618099/3ebaa6c3-e69c-421d-9672-2a478a8020c4)
 
 
