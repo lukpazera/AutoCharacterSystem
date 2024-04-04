@@ -7,7 +7,7 @@ This repository contains all the ACS3 source code and assets and the ACS3 produc
 
 
 ### ACS3 product Installation
-If you just want to install and use ACS3 simply go to releases and download *.zip* file of the latest release. Then follow instructions in the *Getting Started.txt* that’s in the main folder of the ACS repository.
+If you just want to install and use ACS3 simply go to releases and download *.zip* file of the latest release. Then follow instructions in the *GETSTARTED.md* that’s in the main folder of the ACS repository.
 
 
 ### ACS3 repository breakdown.
