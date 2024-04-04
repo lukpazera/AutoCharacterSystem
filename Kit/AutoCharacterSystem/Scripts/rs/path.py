@@ -143,8 +143,6 @@ class Path(object):
         self.register(c.Path.PRESETS_INTERNAL, os.path.join(self.MAIN_PATH, 'Presets_Internal'))
         self.register(c.Path.PIECES, os.path.join(self.MAIN_PATH, 'Presets_Internal', 'Pieces'))
         self.register(c.Path.THUMBNAILS, os.path.join(self.MAIN_PATH, 'Thumbnails'))
-        self.register(c.Path.TEMPLATES, os.path.join(self.MAIN_PATH, 'Templates'))
-        self.register(c.Path.SCENE_TEMPLATES, os.path.join(self.MAIN_PATH, 'Scene Templates'))
 
     def __init__(self):
         self._paths = {}

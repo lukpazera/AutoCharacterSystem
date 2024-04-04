@@ -26,8 +26,6 @@ class Path(object):
     MODULES_INTERNAL = 'intmodules'
     RIGS = 'rigs'
     THUMBNAILS = 'thumbs'
-    TEMPLATES = 'tmplt'
-    SCENE_TEMPLATES = 'stmplt'
 
 class Graph(object):
     EDIT_RIG = 'rs.editRig'
