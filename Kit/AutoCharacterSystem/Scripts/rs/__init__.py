@@ -5,6 +5,7 @@ from .debug import debug
 from .core import service as service
 from . import const as c
 from . import acs2
+from . import io
 
 import time
 initTime = time.time()

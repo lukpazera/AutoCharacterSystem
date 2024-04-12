@@ -13,10 +13,9 @@ import time
 import lx
 import lxifc
 import modox
-from modox import io_lxe
 import rs
 from rs.const import DropActionCode as d
-
+from rs import io as io
 
 sSERVER_NAME = 'rs.presetDropServer'
 
@@ -81,7 +80,7 @@ class RSPresetDropServer(lxifc.Drop):
 
             # If the preset matches initially the file needs to be scanned
             # in search of the preset type tag on first group locator item.
-            lxo_read = io_lxe.LXORead()
+            lxo_read = io.LXORead()
             if not lxo_read.Start(self.preset_filename):
                 continue
 
