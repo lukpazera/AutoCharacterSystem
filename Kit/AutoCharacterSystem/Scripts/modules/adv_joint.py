@@ -120,6 +120,9 @@ class AdvancedJointModule(rs.base_FeaturedModule):
     def onSwitchToFK(self, switcherFeature):
         stretchCtrl = self.module.getKeyItem(KEY_STRETCH_CONTROLLER)
         blendedJoint = self.module.getKeyItem(KEY_BLENDED_JOINT)
+        masterScaleChan = self.module.getInputChannel(rs.c.InputChannelName.MASTER_SCALE_FACTOR)
+        masterScale = masterScaleChan.get(time=None, action=None)
+        lx.out(masterScale)
         blendedScale = modox.LocatorUtils.getItemScale(blendedJoint.modoItem, time=None, action=None)  # will it get eval?
         stretchScaleXfrm = modox.LocatorUtils.getTransformItem(stretchCtrl.modoItem, modox.c.TransformType.SCALE)
-        stretchScaleXfrm.channel(modox.c.TransformChannels.ScaleZ).set(blendedScale.z, time=None, key=True, action=lx.symbol.s_ACTIONLAYER_EDIT)
+        stretchScaleXfrm.channel(modox.c.TransformChannels.ScaleZ).set(blendedScale.z / masterScale, time=None, key=True, action=lx.symbol.s_ACTIONLAYER_EDIT)

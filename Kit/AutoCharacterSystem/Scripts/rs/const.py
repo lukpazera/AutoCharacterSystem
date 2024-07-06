@@ -395,3 +395,8 @@ class DropActionCode(object):
     POSE = 'pose'
     MIRRORPOSE = 'mpose'
     NEWACTION = 'naction'
+
+
+class InputChannelName(object):
+    MASTER_SCALE_FACTOR = "MasterScaleFactor"
+    MASTER_SCALE = "MasterScale"
